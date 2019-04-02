@@ -1,4 +1,4 @@
-import { GET_CATEGORIES } from '../actions/category';
+import { REQUEST_CATEGORIES } from '../../actions/category/CategoryAction';
 
 const categoriesInitialState = {
   items: []
@@ -6,10 +6,11 @@ const categoriesInitialState = {
 
 export const categories = ( state = categoriesInitialState, action ) => {
   switch ( action.type ) {
-    case GET_CATEGORIES:
+    case REQUEST_CATEGORIES:
+    const {items} = action
       return {
         ...state,
-        items: action.items,
+        items,
       }
     default:
       return state

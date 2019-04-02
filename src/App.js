@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'; 
+import {fetchCategories} from './actions/category/CategoryAction';
 
 class App extends Component {
+  componentWillMount() {
+    this.props.fetchCategories()
+  }
+
   render() {
+    const { categories } = this.props
+    let contentCategorie = ''
+    if (categories.items.length > 0) {
+      contentCategorie = (
+         <ul>
+          { categories.items.map( category => (
+            <li key={category.path}>{ category.name }</li>
+          ))}
+        </ul>
+      )
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {contentCategorie}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ categories }) => {
+  return {
+    categories,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchCategories: () => dispatch(fetchCategories()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
