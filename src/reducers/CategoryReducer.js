@@ -1,4 +1,4 @@
-import { REQUEST_CATEGORIES } from '../../actions/category/CategoryAction';
+import { REQUEST_CATEGORIES } from '../actions/CategoryAction';
 
 const categoriesInitialState = {
   items: []

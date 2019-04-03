@@ -1,4 +1,4 @@
-import * as CategoryAPI from '../../api/category'
+import * as CategoryAPI from '../api/category'
 export const REQUEST_CATEGORIES = 'GET_CATEGORIES'
 
 export const getCategories = categories => (

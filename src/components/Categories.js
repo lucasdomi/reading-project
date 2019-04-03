@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 // import './App.css';
 import { connect } from 'react-redux'; 
-import {fetchCategories} from '../actions/category/CategoryAction';
+import {fetchCategories} from '../actions/CategoryAction';
 
-class HomePage extends Component {
+class Categories extends Component {
   componentWillMount() {
     this.props.fetchCategories()
   }
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)
