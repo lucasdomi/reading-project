@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 // import './App.css';
 import { connect } from 'react-redux'; 
+import {Link} from 'react-router-dom'
 import {fetchCategories} from '../actions/CategoryAction';
 
-class Categories extends Component {
+class ListCategories extends Component {
   componentWillMount() {
     this.props.fetchCategories()
   }
@@ -15,7 +16,7 @@ class Categories extends Component {
       contentCategorie = (
          <ul>
           { categories.items.map( category => (
-            <li key={category.path}>{ category.name }</li>
+            <li key={category.path}><Link to ={category.path}>{category.name}</Link></li>
           ))}
         </ul>
       )
@@ -40,4 +41,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default connect(mapStateToProps, mapDispatchToProps)(ListCategories)
