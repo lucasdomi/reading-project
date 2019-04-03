@@ -1,43 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import { connect } from 'react-redux'; 
-import {fetchCategories} from './actions/category/CategoryAction';
+import {Route} from 'react-router-dom';
+import HomePage from './components/HomePage';
 
 class App extends Component {
-  componentWillMount() {
-    this.props.fetchCategories()
-  }
-
   render() {
-    const { categories } = this.props
-    let contentCategorie = ''
-    if (categories.items.length > 0) {
-      contentCategorie = (
-         <ul>
-          { categories.items.map( category => (
-            <li key={category.path}>{ category.name }</li>
-          ))}
-        </ul>
-      )
-    }
     return (
-      <div className="App">
-        {contentCategorie}
-      </div>
+      <Route exact path="/" component={HomePage}/>
     );
   }
 }
 
-const mapStateToProps = ({ categories }) => {
-  return {
-    categories,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchCategories: () => dispatch(fetchCategories()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
