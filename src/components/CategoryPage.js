@@ -21,29 +21,35 @@ class CategoryPage extends Component {
     return (categoryPosts && categoryPosts.posts.length)
   }
 
-  render() {
+  infoCategories () {
     const { categoriesPosts } = this.props
     const { category } = this.state
     const categoryPosts = categoriesPosts[category]
-    let content = (<p>No posts found for {category}</p>)
     if ( this.hasPostOnCategory() ) {
-      content = (
+      return (
          <ul>
           { categoryPosts.posts.sort().map( post => (
             <li key={post.id}>
-              {/* <b>{ post.title }</b>  */}
               <Link to={`${category}/${post.id}`}> {post.title} </Link> - vote: { post.voteScore }
             </li>
           ))}
         </ul>
       )
     }
+    else {
+      return (
+        <p>No have post in category</p>
+      )
+    }
+  }
+
+  render() {
     return (
       <div className="App">
         <button onClick={ () => this.changeOrder( 'title' ) }>
           Order by Name
         </button>
-        { content }
+        { this.infoCategories() }
       </div>
     );
   }

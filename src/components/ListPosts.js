@@ -8,11 +8,10 @@ class Posts extends Component {
     this.props.fetchPosts()
   }
 
-  render() {
+  listPosts () {
     const { posts } = this.props
-    let contentPost = ''
     if ( posts.items.length > 0) {
-      contentPost = (
+      return (
          <ul>
           { posts.items.map( post => (
             <li key={post.id}>
@@ -22,9 +21,17 @@ class Posts extends Component {
         </ul>
       )
     }
+    else {
+      return (
+        <p>No post found</p>
+      )
+    }
+  }
+
+  render() {
     return (
       <div className="App">
-        { contentPost }
+        { this.listPosts() }
       </div>
     );
   }

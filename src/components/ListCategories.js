@@ -9,11 +9,10 @@ class ListCategories extends Component {
     this.props.fetchCategories()
   }
 
-  render() {
+  listCategories () {
     const { categories } = this.props
-    let contentCategorie = ''
     if (categories.items.length > 0) {
-      contentCategorie = (
+      return (
          <ul>
           { categories.items.map( category => (
             <li key={category.path}><Link to ={category.path}>{category.name}</Link></li>
@@ -21,9 +20,16 @@ class ListCategories extends Component {
         </ul>
       )
     }
+    else {
+      return (
+        <p>No categories :(</p>
+      )
+    }
+  }
+  render() {
     return (
       <div className="App">
-        {contentCategorie}
+        {this.listCategories()}
       </div>
     );
   }

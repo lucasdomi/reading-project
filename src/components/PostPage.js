@@ -10,23 +10,30 @@ class PostPage extends Component {
     this.props.fetchPost(postId)
   }
 
-  render() {
+  InfosPost () {
     const { post } = this.props
-    let content = (<p>No posts found</p>)
-    if ( post.content ) {
-      content = (
+    if (post.content) {
+      return (
         <div>
           <p>{post.content.title}</p>
           <p>{post.content.author}</p>
           <p>{post.content.timestamp}</p>
           <p>{post.content.voteScore}</p>
-          <p>{ post.content.body }</p>
+          <p>{post.content.body }</p>
         </div>
       )
     }
+    else {
+      return (
+        <p>No posts found</p>
+      )
+    }
+  }
+
+  render() {
     return (
       <div className="App">
-        { content }
+        {this.InfosPost()}
       </div>
     );
   }
