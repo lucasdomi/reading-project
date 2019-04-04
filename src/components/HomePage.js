@@ -1,6 +1,6 @@
 import React from 'react';
 import Categories from './ListCategories'
-import Posts from './Posts'
+import Posts from './ListPosts'
 
 const HomePage = () => 
   <div>

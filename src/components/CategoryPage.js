@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom';
 import { fetchCategoryPosts } from '../actions/CategoryAction'
-import _ from 'underscore'
+// import _ from 'underscore'
 class CategoryPage extends Component {
   state = {
     category: '',
@@ -29,8 +30,10 @@ class CategoryPage extends Component {
       content = (
          <ul>
           { categoryPosts.posts.sort().map( post => (
-
-            <li key={post.id}><b>{ post.title }</b> - vote: { post.voteScore }</li>
+            <li key={post.id}>
+              {/* <b>{ post.title }</b>  */}
+              <Link to={`${category}/${post.id}`}> {post.title} </Link> - vote: { post.voteScore }
+            </li>
           ))}
         </ul>
       )

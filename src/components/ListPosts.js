@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchPosts } from '../actions/PostActions';
+import {Link} from 'react-router-dom';
 
 class Posts extends Component {
   componentWillMount() {
@@ -14,7 +15,9 @@ class Posts extends Component {
       contentPost = (
          <ul>
           { posts.items.map( post => (
-            <li key={post.id}>{ post.title }</li>
+            <li key={post.id}>
+              <Link to={`${post.category}/${post.id}`}>{ post.title }</Link> - vote: { post.voteScore }
+            </li>
           ))}
         </ul>
       )
