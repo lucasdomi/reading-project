@@ -18,7 +18,7 @@ export const fetchPosts = () => dispatch => {
 export const getPost = post => {
   return {
     type: REQUEST_POST,
-    content: post,
+    items: post,
   }
 }
 

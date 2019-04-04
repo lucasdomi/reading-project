@@ -1,11 +1,11 @@
-import { GET_POST_COMMENTS } from '../actions/CommentAction'
+import { REQUEST_POST_COMMENTS } from '../actions/CommentAction'
 
 const initialPostCommentsState = {
 }
 
 export const postsComments = ( state = initialPostCommentsState, action ) => {
   switch ( action.type ) {
-    case GET_POST_COMMENTS:
+    case REQUEST_POST_COMMENTS:
       const { postId, items } = action
       return {
         ...state,

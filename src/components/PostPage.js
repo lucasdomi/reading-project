@@ -12,15 +12,15 @@ class PostPage extends Component {
 
   InfosPost () {
     const { post } = this.props
-    if (post.content) {
+    if (post.items) {
       return (
         <div>
-          <p>{post.content.title}</p>
-          <p>{post.content.author}</p>
-          <p>{post.content.timestamp}</p>
-          <p>{post.content.voteScore}</p>
-          <p>{post.content.body }</p>
-          <Comment postId={post.content.id}/>
+          <p>{post.items.title}</p>
+          <p>{post.items.author}</p>
+          <p>{post.items.timestamp}</p>
+          <p>{post.items.voteScore}</p>
+          <p>{post.items.body }</p>
+          <Comment postId={post.items.id}/>
         </div>
       )
     }

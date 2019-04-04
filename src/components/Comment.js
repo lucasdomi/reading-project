@@ -19,7 +19,6 @@ class Comments extends Component {
   }
 
   comments () {
-    const { postsComments, postId } = this.props
     const comments = this.postComments()
     let content;
     if ( comments ) {
@@ -56,7 +55,7 @@ const mapStateToProps = ({ postsComments }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPostComments: ( postId ) => dispatch( fetchPostComments( postId ) ),
+    fetchPostComments: (postId) => dispatch( fetchPostComments( postId ) ),
   }
 }
 

@@ -20,10 +20,10 @@ export const posts = ( state = postsInitialState, action ) => {
 export const post = ( state = {}, action ) => {
   switch ( action.type ) {
     case REQUEST_POST:
-      const { content } = action
+      const { items } = action
       return {
         ...state,
-        content,
+        items,
       }
     default:
       return state
