@@ -2,6 +2,7 @@ import * as PostAPI from '../api/post'
 
 export const REQUEST_ALL_POSTS = 'REQUEST_ALL_POSTS'
 export const REQUEST_POST= 'REQUEST_POST';
+export const NEW_POST = 'NEW_POST'
 
 export const getPosts = posts => (
   {
@@ -26,3 +27,15 @@ export const fetchPost = postId => dispatch => {
   PostAPI.getPost( postId )
     .then( post => dispatch(getPost(post)))
 }
+
+export const addPost = post => (
+  {
+    type: NEW_POST,
+    post,
+  }
+)
+
+export const createPost = post => dispatch => (
+  PostAPI.addPost( post )
+    .then( post => dispatch( addPost( post ) ) )
+)

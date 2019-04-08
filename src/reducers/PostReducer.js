@@ -1,4 +1,4 @@
-import { REQUEST_ALL_POSTS, REQUEST_POST } from '../actions/PostActions'
+import { REQUEST_ALL_POSTS, REQUEST_POST, NEW_POST } from '../actions/PostActions'
 
 const postsInitialState = {
   items: []
@@ -24,6 +24,15 @@ export const post = ( state = {}, action ) => {
       return {
         ...state,
         items,
+      }
+    case NEW_POST:
+      const { post } = action
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          post
+        ]
       }
     default:
       return state

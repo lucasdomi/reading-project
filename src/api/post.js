@@ -14,3 +14,11 @@ export const getPost = postId => (
   axios.get ( `${apiUrl}/posts/${postId}`, {headers} )
     .then( res => res.data )
 )
+
+export const addPost = post => (
+  axios.post ( `${ apiUrl }/posts`, {
+    headers: { ...headers, 'Content-Type': 'application/json' },
+    body: JSON.stringify(post),
+  })
+  .then(res => res.data)
+)
