@@ -6,12 +6,15 @@ import uuid from 'uuid';
 class NewPost extends Component {
   state = {
     post : {
-      category : '',
+      id: '',
+      title:  '',
+      category:  '',
+      body: '',
+      author: '',
     } 
   }
 
   componentDidMount() {
-    console.log(this.props)
     !this.props.categories.items.length && this.props.fetchCategories()
   }
 
@@ -32,7 +35,7 @@ class NewPost extends Component {
         [event.target.name]: event.target.value
       }
     })
-    console.log("entrou", this.state.post.category);
+    console.log("entrou", event.target.value);
   }
 
   submitPost = event => {
@@ -41,17 +44,14 @@ class NewPost extends Component {
   }
 
   render () {
-    // const { categories } = this.props
-    // let fetchCategories = '';
-    // fetchCategories = categories.items.map (category => (
-    //   <option key={category.path} value={category.name}>{category.name}</option>
-    // ))
     return (
       <div>
         <form autoComplete="off">
           <label>
             Title:
-            <input type="text" name="title" onChange={this.handleChange}/>
+            <input type="text" name="title" 
+              onChange={(e) => this.handleChange(e)}
+            />
           </label>
 
           <label>
@@ -59,20 +59,24 @@ class NewPost extends Component {
             <select
               name="category" 
               value={this.state.post.category} 
-              onChange={(e) => this.setState({post: {category: e.target.value}})}
+              onChange={(e) => this.handleChange(e)}
             >
               {this.fetchCategories()}
             </select>
           </label>
           
           <label>
-            Autor:
-            <input type="text" name="autor" onChange={this.handleChange}/>
+            Author:
+            <input type="text" name="author" 
+              onChange={(e) => this.handleChange(e)}
+              />
           </label>
 
           <label>
             Content:
-            <textarea name="content" onChange={this.handleChange}/>
+            <textarea name="body" 
+              onChange={(e) => this.handleChange(e)}
+            />
           </label>
 
           <button onClick={this.submitPost}>
