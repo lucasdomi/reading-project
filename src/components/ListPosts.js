@@ -32,6 +32,9 @@ class Posts extends Component {
     return (
       <div className="App">
         { this.listPosts() }
+        <div>
+          <Link to={'/post/create'}>New Post</Link>
+        </div>
       </div>
     );
   }

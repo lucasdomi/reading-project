@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
 import { createPost } from '../actions/PostActions'
 import { fetchCategories } from '../actions/CategoryAction'
+import { fetchPost } from '../actions/PostActions';
 import { connect } from 'react-redux'
 import uuid from 'uuid';
-class NewPost extends Component {
+
+class EditPost extends Component {
   state = {
     post : {
-      id: '',
-      title:  '',
-      category:  '',
-      body: '',
-      author: '',
+      id: this.props.post.content && this.props.post.content.id || '',
+      title: this.props.post.content && this.props.post.content.title || '',
+      category: this.props.post.content && this.props.post.content.category  || '',
+      body: this.props.post.content && this.props.post.content.body || '',
+      author: this.props.post.content && this.props.post.content.author || '',
     } 
   }
 
   componentDidMount() {
     !this.props.categories.items.length && this.props.fetchCategories()
+    this.props.fetchPost(this.props.match.params.postId)
   }
 
   fetchCategories () {
@@ -88,9 +91,10 @@ class NewPost extends Component {
 
 }
 
-const mapStateToProps = ({ categories }) => {
+const mapStateToProps = ({ categories, post }) => {
   return {
     categories,
+    post
   }
 }
   
@@ -98,7 +102,8 @@ const mapStateToProps = ({ categories }) => {
     return {
       createPost: post => dispatch( createPost( post ) ),
       fetchCategories: () => dispatch( fetchCategories() ),
+      fetchPost: postId => dispatch (fetchPost(postId))
     }
   }
   
-export default connect(mapStateToProps, mapDispatchToProps)(NewPost)
+export default connect(mapStateToProps, mapDispatchToProps)(EditPost)
