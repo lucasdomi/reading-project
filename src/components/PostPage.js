@@ -13,7 +13,8 @@ class PostPage extends Component {
   }
   
   delete = () => {
-    const postId = this.props.post.content.id
+    console.log(this.props.post)
+    const postId = this.props.post.items.id
     deletePost(postId)
     this.props.history.push('/')
   }
@@ -23,8 +24,8 @@ class PostPage extends Component {
     if (post.items) {
       return (
         <div>
-          <Link to={`/post/edit/${post.content.id}`}>Editar</Link>
-          <p onClick={this.delete}>Deletar</p>
+          <Link to={`/post/edit/${post.items.id}`}>Editar</Link>
+          <button onClick={this.delete}>Deletar</button>
           <p>{post.items.title}</p>
           <p>{post.items.author}</p>
           <p>{post.items.timestamp}</p>

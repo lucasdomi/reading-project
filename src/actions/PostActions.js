@@ -3,6 +3,7 @@ import * as PostAPI from '../api/post'
 export const REQUEST_ALL_POSTS = 'REQUEST_ALL_POSTS'
 export const REQUEST_POST= 'REQUEST_POST';
 export const NEW_POST = 'NEW_POST'
+export const EDIT_POST = 'EDIT_POST'
 
 export const getPosts = posts => (
   {
@@ -40,6 +41,14 @@ export const createPost = post => dispatch => (
     .then( post => dispatch( addPost( post ) ) )
 )
 
+export const edit = post => (
+  {
+    type: EDIT_POST,
+    post
+  }
+)
+
 export const editPost = post => dispatch => (
   PostAPI.updatePost( post )
+    .then( post => dispatch( edit( post ) ) )
 )

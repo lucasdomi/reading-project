@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
-import { createPost } from '../actions/PostActions'
+import { editPost } from '../actions/PostActions'
 import { fetchCategories } from '../actions/CategoryAction'
 import { fetchPost } from '../actions/PostActions';
 import { connect } from 'react-redux'
-import uuid from 'uuid';
 
 class EditPost extends Component {
   state = {
     post : {
-      id: this.props.post.content && this.props.post.content.id || '',
-      title: this.props.post.content && this.props.post.content.title || '',
-      category: this.props.post.content && this.props.post.content.category  || '',
-      body: this.props.post.content && this.props.post.content.body || '',
-      author: this.props.post.content && this.props.post.content.author || '',
+      id: this.props.post && this.props.post.id || '',
+      title: this.props.post && this.props.post.title || '',
+      category: this.props.post && this.props.post.category  || '',
+      body: this.props.post && this.props.post.body || '',
+      author: this.props.post && this.props.post.author || '',
     } 
   }
 
@@ -41,8 +40,8 @@ class EditPost extends Component {
   }
 
   submitPost = event => {
-    const postBody = {...this.state.post, timestamp: Date.now(), id:uuid.v1()}
-    this.props.createPost(postBody)
+    const { post } = this.state
+    this.props.editPost( post )
   }
 
   render () {
@@ -51,7 +50,7 @@ class EditPost extends Component {
         <form autoComplete="off">
           <label>
             Title:
-            <input type="text" name="title" 
+            <input type="text" name="title" value={this.state.post.title}
               onChange={(e) => this.handleChange(e)}
             />
           </label>
@@ -69,14 +68,14 @@ class EditPost extends Component {
           
           <label>
             Author:
-            <input type="text" name="author" 
+            <input type="text" name="author" value={this.state.post.author}
               onChange={(e) => this.handleChange(e)}
               />
           </label>
 
           <label>
             Content:
-            <textarea name="body" 
+            <textarea name="body" value={this.state.post.body}
               onChange={(e) => this.handleChange(e)}
             />
           </label>
@@ -97,13 +96,13 @@ const mapStateToProps = ({ categories, post }) => {
     post
   }
 }
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-      createPost: post => dispatch( createPost( post ) ),
-      fetchCategories: () => dispatch( fetchCategories() ),
-      fetchPost: postId => dispatch (fetchPost(postId))
-    }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    editPost: post => dispatch( editPost( post ) ),
+    fetchCategories: () => dispatch( fetchCategories() ),
+    fetchPost: postId => dispatch( fetchPost( postId ) ),
   }
-  
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(EditPost)
