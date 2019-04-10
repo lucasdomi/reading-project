@@ -50,5 +50,5 @@ export const edit = post => (
 
 export const editPost = post => dispatch => (
   PostAPI.updatePost( post )
-    .then( post => dispatch( edit( post ) ) )
+    .then( post => dispatch(edit(post)))
 )

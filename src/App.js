@@ -10,6 +10,11 @@ import NewPost from "./components/NewPost";
 import EditPost from './components/EditPost';
 import {fetchPosts} from './actions/PostActions'
 class App extends Component {
+  
+  componentDidMount() {
+    this.props.fetchPosts()
+  }
+  
   render() {
     return (
       <Switch>

@@ -7,17 +7,29 @@ import { connect } from 'react-redux'
 class EditPost extends Component {
   state = {
     post : {
-      id: this.props.post && this.props.post.id || '',
-      title: this.props.post && this.props.post.title || '',
-      category: this.props.post && this.props.post.category  || '',
-      body: this.props.post && this.props.post.body || '',
-      author: this.props.post && this.props.post.author || '',
+      id: (this.props.post.items) && (this.props.post.items.id || ''),
+      title: (this.props.post.items) && (this.props.post.items.title || ''),
+      category: (this.props.post.items) && (this.props.post.items.category || ''),
+      body: (this.props.post.items) && (this.props.post.items.body || ''),
+      author: (this.props.post.items) && (this.props.post.items.author || ''),
     } 
   }
 
   componentDidMount() {
+    console.log(this.props.post)
     !this.props.categories.items.length && this.props.fetchCategories()
     this.props.fetchPost(this.props.match.params.postId)
+    // const { postId } = this.props.match.params
+    const post = this.props.post;
+    console.log("aqui",post);
+    if (post.items)
+      this.setState( {
+        id: (post.items.id || ''),
+        title: (post.items.title || ''),
+        category: (post.items.category || ''),
+        body: (post.items.body || ''),
+        author:(post.items.author || ''),
+      })
   }
 
   fetchCategories () {
@@ -59,7 +71,7 @@ class EditPost extends Component {
             Category:
             <select
               name="category" 
-              value={this.state.post.category} 
+              value={this.state.post.category || ''} 
               onChange={(e) => this.handleChange(e)}
             >
               {this.fetchCategories()}
@@ -68,14 +80,14 @@ class EditPost extends Component {
           
           <label>
             Author:
-            <input type="text" name="author" value={this.state.post.author}
+            <input type="text" name="author" value={this.state.post.author || ''}
               onChange={(e) => this.handleChange(e)}
               />
           </label>
 
           <label>
             Content:
-            <textarea name="body" value={this.state.post.body}
+            <textarea name="body" value={this.state.post.body || ''}
               onChange={(e) => this.handleChange(e)}
             />
           </label>

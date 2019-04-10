@@ -13,10 +13,10 @@ class PostPage extends Component {
   }
   
   delete = () => {
-    console.log(this.props.post)
     const postId = this.props.post.items.id
     deletePost(postId)
     this.props.history.push('/')
+
   }
 
   InfosPost () {

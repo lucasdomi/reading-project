@@ -8,7 +8,6 @@ class Comments extends Component {
   componentDidMount() {
     const { postId } = this.props
     this.props.fetchPostComments( postId )
-    console.log(this.props)
   }
 
   postComments = () => {
