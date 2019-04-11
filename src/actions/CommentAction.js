@@ -2,6 +2,8 @@
 import * as CommentsAPI from '../api/comments'
 
 export const REQUEST_POST_COMMENTS = 'REQUEST_POST_COMMENTS'
+export const NEW_COMMENT = 'NEW_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
 
 export const getPostComments = ( postId, comments ) => (
   {
@@ -10,8 +12,33 @@ export const getPostComments = ( postId, comments ) => (
     items: comments,
   }
 )
-
 export const fetchPostComments = postId => dispatch => {
   CommentsAPI.getPostComments( postId )
     .then( comments =>  dispatch( getPostComments( postId, comments ) ) )
 }
+
+export const addComment = ( postId, comment ) => (
+  {
+    type: NEW_COMMENT,
+    postId,
+    comment,
+  }
+)
+
+export const newComment = ( commentData ) => dispatch => (
+  CommentsAPI.addComment( commentData )
+  .then( comment => dispatch( addComment( commentData.parentId, comment ) ) )
+)
+
+export const edit = ( postId, comment ) => (
+  {
+    type: EDIT_COMMENT,
+    postId,
+    comment,
+  }
+)
+
+export const editComment = ( commentData ) => dispatch => (
+  CommentsAPI.editComment( commentData )
+  .then( comment => dispatch( edit( comment.parentId, comment ) ) )
+)
