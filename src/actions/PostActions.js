@@ -21,7 +21,7 @@ export const fetchPosts = () => dispatch => {
 export const getPost = post => {
   return {
     type: REQUEST_POST,
-    items: post,
+    page: post,
   }
 }
 

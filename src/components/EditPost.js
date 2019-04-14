@@ -1,36 +1,42 @@
 import React, {Component} from 'react';
 import { editPost } from '../actions/PostActions'
 import { fetchCategories } from '../actions/CategoryAction'
-import { fetchPost } from '../actions/PostActions';
 import { connect } from 'react-redux'
 
 class EditPost extends Component {
   state = {
     post : {
-      id: (this.props.post.items) && (this.props.post.items.id || ''),
-      title: (this.props.post.items) && (this.props.post.items.title || ''),
-      category: (this.props.post.items) && (this.props.post.items.category || ''),
-      body: (this.props.post.items) && (this.props.post.items.body || ''),
-      author: (this.props.post.items) && (this.props.post.items.author || ''),
+      title: '',
+      body: '',
+      author: '',
+      category: '',
     } 
   }
 
   componentDidMount() {
-    console.log(this.props.post)
     !this.props.categories.items.length && this.props.fetchCategories()
-    this.props.fetchPost(this.props.match.params.postId)
-    // const { postId } = this.props.match.params
-    const post = this.props.post;
-    console.log("aqui",post);
-    if (post.items)
-      this.setState( {
-        id: (post.items.id || ''),
-        title: (post.items.title || ''),
-        category: (post.items.category || ''),
-        body: (post.items.body || ''),
-        author:(post.items.author || ''),
+    const { postId } = this.props.match.params
+    console.log(this.props)
+    const post = this.props.posts[postId]
+    if (post) {
+      this.setState({
+        ...this.state,
+        post
       })
+    }
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.posts !== this.props.posts) {
+      const { postId } = this.props.match.params
+      const post = this.props.posts[postId]
+      this.setState({
+        ...this.state,
+        post
+      })
+    }
+  }
+  
 
   fetchCategories () {
     const { categories } = this.props
@@ -102,10 +108,10 @@ class EditPost extends Component {
 
 }
 
-const mapStateToProps = ({ categories, post }) => {
+const mapStateToProps = ({ categories, posts }) => {
   return {
     categories,
-    post
+    posts
   }
 }
 
@@ -113,7 +119,6 @@ const mapDispatchToProps = dispatch => {
   return {
     editPost: post => dispatch( editPost( post ) ),
     fetchCategories: () => dispatch( fetchCategories() ),
-    fetchPost: postId => dispatch( fetchPost( postId ) ),
   }
 }
 

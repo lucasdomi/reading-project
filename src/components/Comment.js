@@ -18,13 +18,6 @@ class Comments extends Component {
     this.props.fetchPostComments( postId )
   }
 
-  postComments = () => {
-    const { postsComments, postId } = this.props
-    if (postsComments && postsComments[postId]) {
-      return postsComments[postId].items
-    }
-  }
-
   sendComment = () =>  {
     const commentData = {...this.state.comment, timestamp: Date.now(), id: uuid.v1(), parentId: this.props.postId }
     this.props.newComment(commentData)
@@ -45,12 +38,24 @@ class Comments extends Component {
     })
   }
 
+  postComments = () => {
+    const { postsComments, postId } = this.props
+    const comments = postsComments[postId]
+    if (!comments) {
+      return comments
+    }
+    return comments.ids.map( id => (
+      comments[id]
+    ))
+  }
+
   comments () {
     const comments = this.postComments()
+
     let content;
     if (comments) {
       content = comments.map( comment => (
-        <div>
+        <div key={comment.id}>
           <p>{ comment.author }</p>
           <p>{ comment.body }</p>
           <p>Votes: { comment.voteScore }</p>
