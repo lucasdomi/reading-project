@@ -52,17 +52,33 @@ class Comment extends Component {
 
   render() {
     const { comment } = this.props
+    const {edit, body} = this.state
     return (
       <div>
+        <button onClick={ this.handleEdit }>Editar</button>
+
         <p>{ comment.author }</p>
-        <p>{ comment.body }</p>
+        
         <div>
           <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
           <span>Votes:{ comment.voteScore }</span>
           <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
         </div>
         <p>{comment.timestamp}</p>
-      </div>
+        { edit ?
+        <div>
+            <label>
+              Content:
+              <textarea value={ body }
+                onChange={(e) => this.handleCommentBody(e)}
+              />
+            </label>
+            <button onClick={this.submitComment}>
+              Confirmar 
+            </button> 
+          </div> :
+          <p>{comment.body}</p>}
+        </div>
     )
   }
 }
