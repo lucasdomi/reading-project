@@ -78,7 +78,7 @@ import { connect } from 'react-redux'
 import { fetchPost, ratePost } from '../actions/PostActions'
 import { Link } from 'react-router-dom';
 import { deletePost } from '../api/post';
-import Comment from "../components/Comment";
+import Comment from "./ListComments";
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
 
 class PostPage extends Component {

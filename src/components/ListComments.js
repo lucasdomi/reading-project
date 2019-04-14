@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchPostComments, newComment } from '../actions/CommentAction'
 import uuid from 'uuid'
+import CommentPage from './CommentPage';
 
 class Comments extends Component {
 
@@ -12,6 +13,8 @@ class Comments extends Component {
       body: '',
     }
   }
+
+
 
   componentDidMount() {
     const { postId } = this.props
@@ -49,31 +52,20 @@ class Comments extends Component {
     ))
   }
 
-  comments () {
+  render() {
     const comments = this.postComments()
 
-    let content;
-    if (comments) {
-      content = comments.map( comment => (
-        <div key={comment.id}>
-          <p>{ comment.author }</p>
-          <p>{ comment.body }</p>
-          <p>Votes: { comment.voteScore }</p>
-          <p>{comment.timestamp}</p>
-        </div>
-      ))
-      return content;
-    }
-    else {
-      content = <p>No comments</p>
-      return content;
-    }
-  }
-  render() {
     return (
       <div className="comments">
         <h1>Comments</h1>
-        { this.comments() }
+        { comments &&
+        comments.map( comment => (
+          <CommentPage
+            key={ comment.id }
+            comment={ comment }
+          />
+        ))
+      }
         <div>
           <form autoComplete="off">
             <label>
