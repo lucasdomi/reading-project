@@ -1,10 +1,12 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchPost } from '../actions/PostActions'
+import { fetchPost, ratePost } from '../actions/PostActions'
 import { Link } from 'react-router-dom';
 import { deletePost } from '../api/post';
 import Comment from "../components/Comment";
+import { ThumbUp, ThumbDown } from '@material-ui/icons'
+
 class PostPage extends Component {
 
   componentDidMount() {
@@ -16,7 +18,11 @@ class PostPage extends Component {
     const postId = this.props.post.items.id
     deletePost(postId)
     this.props.history.push('/')
+  }
 
+  handleVote = vote => {
+    const { postId } = this.props.match.params
+    this.props.ratePost(postId, vote)
   }
 
   InfosPost () {
@@ -31,7 +37,13 @@ class PostPage extends Component {
           <p>{post.items.timestamp}</p>
           <p>{post.items.voteScore}</p>
           <p>{post.items.body }</p>
+          <div>
+            <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
+            <span>{ post.items.voteScore }</span>
+            <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
+          </div>
           <Comment postId={post.items.id}/>
+
         </div>
       )
     }
@@ -60,6 +72,7 @@ const mapStateToProps = ({ post }) => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchPost: ( postId ) => dispatch( fetchPost( postId ) ),
+    ratePost: ( postId, vote ) => dispatch ( ratePost( postId, vote ) ),
   }
 }
 

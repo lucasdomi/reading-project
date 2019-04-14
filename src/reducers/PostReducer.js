@@ -1,4 +1,4 @@
-import { REQUEST_ALL_POSTS, REQUEST_POST, NEW_POST, EDIT_POST } from '../actions/PostActions'
+import { REQUEST_ALL_POSTS, REQUEST_POST, NEW_POST, EDIT_POST, VOTE_POST } from '../actions/PostActions'
 
 const postsInitialState = {
   items: []
@@ -35,13 +35,18 @@ export const post = ( state = {}, action ) => {
         ]
     }
     case EDIT_POST:
-    return {
-      ...state,
-      items: [
-        ...state.items,
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          post
+        ]
+      }
+    case VOTE_POST:
+      return {
+        ...state,
         post
-      ]
-    }
+      }
     default:
       return state
   }
