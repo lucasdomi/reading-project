@@ -19,7 +19,8 @@ class Comments extends Component {
     this.props.fetchPostComments( postId )
   }
 
-  sendComment = () =>  {
+  sendComment = (e) =>  {
+    e.preventDefault();
     const commentData = {...this.state.comment, timestamp: Date.now(), id: uuid.v1(), parentId: this.props.postId }
     this.props.newComment(commentData)
     this.setState({
@@ -76,7 +77,7 @@ class Comments extends Component {
                   onChange={(e) => this.handleComment(e)}
                 />
             </label>
-            <button onClick={() => this.sendComment()}>
+            <button onClick={(e) => this.sendComment(e)}>
               Send
             </button>
           </form>
