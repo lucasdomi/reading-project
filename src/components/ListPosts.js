@@ -28,24 +28,24 @@ class Posts extends Component {
     }
   }
 
-  testPost () {
+  getIdPost () {
     const { posts } = this.props
     let postsContent = posts.ids.map( id => ( posts[id] ) )
     return postsContent
   }
 
   render() {
-    const posts = this.testPost();
+    const posts = this.getIdPost();
     let page = ''
     if (posts.length) {
      page = ( 
-     <ul>
-      { posts.map( post => (
-        <li key={post.id}>
-          <Link to={`${post.category}/${post.id}`}>{ post.title }</Link> - vote: { post.voteScore }
-        </li>
-      ))}
-    </ul>)
+      <ul>
+        { posts.filter(post => post.deleted === false).map( post => (
+          <li key={post.id}>
+            <Link to={`${post.category}/${post.id}`}>{ post.title }</Link> - vote: { post.voteScore }
+          </li>
+        ))}
+      </ul>)
     }
     return (
       <div className="App">

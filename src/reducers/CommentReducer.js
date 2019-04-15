@@ -7,38 +7,38 @@ const postCommentsStateInitial = {
 export const postsComments = ( state = postCommentsStateInitial, action ) => {
 
   const { postId, comment } = action
-  const nextState = { ...state }
+  const myState = { ...state }
   switch ( action.type ) {
     case REQUEST_POST_COMMENTS:
       const { items } = action
-      nextState[postId] = { ids: [] }
+      myState[postId] = { ids: [] }
 
       items.forEach( item => {
-        nextState[postId][item.id] = item
-        nextState[postId].ids = [ ...nextState[postId].ids, item.id]
+        myState[postId][item.id] = item
+        myState[postId].ids = [ ...myState[postId].ids, item.id]
       })
-      return nextState
+      return myState
 
     case NEW_COMMENT:
-      nextState[postId][comment.id] = comment
-      nextState[postId].ids = [ ...nextState[postId].ids, comment.id ]
-      return nextState
+      myState[postId][comment.id] = comment
+      myState[postId].ids = [ ...myState[postId].ids, comment.id ]
+      return myState
 
     case EDIT_COMMENT:
-      nextState[postId][comment.id] = {
-        ...nextState[postId][comment.id],
+      myState[postId][comment.id] = {
+        ...myState[postId][comment.id],
         body: comment.body
       }
-      return nextState
+      return myState
 
     case VOTE_COMMENT:
-      nextState[postId][comment.id] = comment
-      return nextState
+      myState[postId][comment.id] = comment
+      return myState
 
     case DELETE_COMMENT:
-      nextState[action.comment.parentId][action.comment.id] = action.comment
-      nextState[postId].allIds = nextState[postId].ids.filter( id => id !== comment.id )
-      return nextState
+      myState[action.comment.parentId][action.comment.id] = action.comment
+      myState[postId].allIds = myState[postId].ids.filter( id => id !== comment.id )
+      return myState
     
     default:
       return state
