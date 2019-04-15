@@ -32,3 +32,11 @@ export const voteComment = ( commentId, vote ) => (
   } )
   .then( res => res.json() )
 )
+
+export const deleteComment = commentId => (
+  fetch ( `${ apiUrl }/comments/${ commentId }`, {
+    method: 'DELETE',
+    headers,
+  })
+  .then( res => res.json() )
+)

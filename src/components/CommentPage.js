@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { editComment, rateComment } from '../actions/CommentAction'
+import { editComment, rateComment, deleteComment } from '../actions/CommentAction'
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
 
 class Comment extends Component {
@@ -40,6 +40,11 @@ class Comment extends Component {
     this.props.rateComment(this.props.comment.id, vote)
   }
 
+  handleDelete = () => {
+    const { deleteComment, comment } = this.props
+    deleteComment(comment.id)
+  }
+  
   submitComment = () => {
     const { comment, editComment } = this.props
     const commentData = { body: this.state.body, timestamp: Date.now(), id: comment.id }
@@ -56,7 +61,7 @@ class Comment extends Component {
     return (
       <div>
         <button onClick={ this.handleEdit }>Editar</button>
-
+        <button onClick = {this.handleDelete }> Excluir</button>
         <p>{ comment.author }</p>
         
         <div>
@@ -85,8 +90,9 @@ class Comment extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editComment: commentData => dispatch( editComment( commentData ) ),
-    rateComment: ( commentId, vote ) => dispatch( rateComment( commentId, vote ) ),
+    editComment: commentData => dispatch(editComment(commentData)),
+    rateComment: (commentId, vote) => dispatch(rateComment(commentId,vote)),
+    deleteComment: commentId => dispatch(deleteComment(commentId)),
   }
 }
 

@@ -1,4 +1,4 @@
-import { REQUEST_POST_COMMENTS, NEW_COMMENT, EDIT_COMMENT, VOTE_COMMENT } from '../actions/CommentAction'
+import { REQUEST_POST_COMMENTS, NEW_COMMENT, EDIT_COMMENT, VOTE_COMMENT, DELETE_COMMENT } from '../actions/CommentAction'
 
 const postCommentsStateInitial = {
   ids: [],
@@ -31,10 +31,15 @@ export const postsComments = ( state = postCommentsStateInitial, action ) => {
       }
       return nextState
 
-      case VOTE_COMMENT:
-        nextState[postId][comment.id] = comment
-        return nextState
+    case VOTE_COMMENT:
+      nextState[postId][comment.id] = comment
+      return nextState
 
+    case DELETE_COMMENT:
+      nextState[action.comment.parentId][action.comment.id] = action.comment
+      nextState[postId].allIds = nextState[postId].ids.filter( id => id !== comment.id )
+      return nextState
+    
     default:
       return state
   }

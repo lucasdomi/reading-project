@@ -14,8 +14,6 @@ class Comments extends Component {
     }
   }
 
-
-
   componentDidMount() {
     const { postId } = this.props
     this.props.fetchPostComments( postId )
@@ -54,12 +52,10 @@ class Comments extends Component {
 
   render() {
     const comments = this.postComments()
-
     return (
       <div className="comments">
         <h1>Comments</h1>
-        { comments &&
-        comments.map( comment => (
+          { comments && comments.filter( comment => comment.deleted === false).map( comment => (
           <CommentPage
             key={ comment.id }
             comment={ comment }
