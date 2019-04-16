@@ -6,7 +6,7 @@ import sortBy from 'sort-by'
 
 class Posts extends Component {
   state = {
-    order: 'voteScore'
+    order: '-voteScore'
   }
 
   changeOrder = order => (

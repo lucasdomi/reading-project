@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import { fetchCategoryPosts } from '../actions/CategoryAction'
-// import _ from 'underscore'
+import sortBy from 'sort-by';
+
 class CategoryPage extends Component {
   state = {
     category: '',
+    order: '-voteScore'
   }
 
   componentDidMount() {
@@ -16,6 +18,13 @@ class CategoryPage extends Component {
     !this.hasPostOnCategory() && this.props.fetchCategoryPosts( category )
   }
 
+
+  changeOrder = order => (
+    this.setState({
+      order
+    })
+  )
+
   hasPostOnCategory = () => {
     const categoryPosts = this.props.categoriesPosts[this.state.category]
     return (categoryPosts && categoryPosts.posts.length)
@@ -23,12 +32,12 @@ class CategoryPage extends Component {
 
   infoCategories () {
     const { categoriesPosts } = this.props
-    const { category } = this.state
+    const { category, order } = this.state
     const categoryPosts = categoriesPosts[category]
     if ( this.hasPostOnCategory() ) {
       return (
          <ul>
-          { categoryPosts.posts.sort().map( post => (
+          { categoryPosts.posts.sort(sortBy(order)).map( post => (
             <li key={post.id}>
               <Link to={`${category}/${post.id}`}> {post.title} </Link> - vote: { post.voteScore }
             </li>
@@ -46,8 +55,11 @@ class CategoryPage extends Component {
   render() {
     return (
       <div className="App">
+        <button onClick={ () => this.changeOrder( '-voteScore' ) }>
+          Order by vote score
+        </button>
         <button onClick={ () => this.changeOrder( 'title' ) }>
-          Order by Name
+          Order by title
         </button>
         { this.infoCategories() }
       </div>
