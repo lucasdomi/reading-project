@@ -2,30 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchPosts } from '../actions/PostActions';
 import {Link} from 'react-router-dom';
+import sortBy from 'sort-by'
 
 class Posts extends Component {
-  componentWillMount() {
-    this.props.fetchPosts()
+  state = {
+    order: 'voteScore'
   }
 
-  listPosts () {
-    const { posts } = this.props
-    if ( posts.items.length > 0) {
-      return (
-         <ul>
-          { posts.items.map( post => (
-            <li key={post.id}>
-              <Link to={`${post.category}/${post.id}`}>{ post.title }</Link> - vote: { post.voteScore }
-            </li>
-          ))}
-        </ul>
-      )
-    }
-    else {
-      return (
-        <p>No post found</p>
-      )
-    }
+  changeOrder = order => (
+    this.setState({
+      order
+    })
+  )
+  
+  componentWillMount() {
+    this.props.fetchPosts()
   }
 
   getIdPost () {
@@ -36,11 +27,12 @@ class Posts extends Component {
 
   render() {
     const posts = this.getIdPost();
+    const { order } = this.state
     let page = ''
     if (posts.length) {
      page = ( 
       <ul>
-        { posts.filter(post => post.deleted === false).map( post => (
+        { posts.sort(sortBy(order)).filter(post => post.deleted === false).map( post => (
           <li key={post.id}>
             <Link to={`${post.category}/${post.id}`}>{ post.title }</Link> - vote: { post.voteScore }
           </li>
@@ -49,6 +41,12 @@ class Posts extends Component {
     }
     return (
       <div className="App">
+        <button onClick={ () => this.changeOrder( '-voteScore' ) }>
+          Order by vote score
+        </button>
+        <button onClick={ () => this.changeOrder( 'title' ) }>
+          Order by title
+        </button>
         { page }
         <div>
           <Link to={'/post/create'}>New Post</Link>
@@ -66,7 +64,7 @@ const mapStateToProps = ({ posts }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPosts: () => dispatch( fetchPosts() ),
+    fetchPosts: () => dispatch(fetchPosts()),
   }
 }
 
