@@ -4,6 +4,8 @@ import { fetchPost, ratePost, deletePost } from '../actions/PostActions'
 import { Link } from 'react-router-dom';
 import Comment from "./ListComments";
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class PostPage extends Component {
 
@@ -31,8 +33,13 @@ class PostPage extends Component {
       page = (
         <div>
           <h1>{post.title}</h1>
-          <Link to={`/post/edit/${post.id}`}>Edit</Link>
-          <button onClick={ this.handleDelete }>Delete</button>
+          <Button size="medium" variant="outlined">
+            <Link to={`/post/edit/${post.id}`}>Edit</Link>
+          </Button>
+          <Button size="medium" onClick = {this.handleDelete} variant="contained" color="secondary">
+            Delete Post
+            <DeleteIcon/>
+          </Button>
           <p>{post.author}</p>
           {post.timestamp}
           <p>{ post.body }</p>

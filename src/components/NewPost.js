@@ -3,6 +3,12 @@ import { createPost } from '../actions/PostActions'
 import { fetchCategories } from '../actions/CategoryAction'
 import { connect } from 'react-redux'
 import uuid from 'uuid';
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
+import Button from '@material-ui/core/Button';
+
 class NewPost extends Component {
   state = {
     post : {
@@ -40,47 +46,57 @@ class NewPost extends Component {
   submitPost = event => {
     const postBody = {...this.state.post, timestamp: Date.now(), id:uuid.v1()}
     this.props.createPost(postBody)
+    this.props.history.push('/')
   }
 
   render () {
     return (
       <div>
         <form autoComplete="off">
-          <label>
-            Title:
-            <input type="text" name="title" 
+          <TextField
+            id="title"
+            name="title"
+            label="Title"
+            // fullWidth
+            margin="normal"
+            onBlur={(e) => this.handleChange(e)}
+          />
+          <FormControl fullWidth>
+            <InputLabel htmlFor="category">Category</InputLabel>
+            <Select
+              value={this.state.post.category}
               onChange={(e) => this.handleChange(e)}
-            />
-          </label>
-
-          <label>
-            Category:
-            <select
-              name="category" 
-              value={this.state.post.category} 
-              onChange={(e) => this.handleChange(e)}
+              inputProps={{
+                name: 'category',
+                id: 'category',
+              }}
             >
-              {this.fetchCategories()}
-            </select>
-          </label>
-          
-          <label>
-            Author:
-            <input type="text" name="author" 
-              onChange={(e) => this.handleChange(e)}
-              />
-          </label>
-
-          <label>
-            Content:
-            <textarea name="body" 
-              onChange={(e) => this.handleChange(e)}
+              { this.fetchCategories() }
+            </Select>
+            </FormControl>
+          <TextField
+              id="author"
+              name="author"
+              label="Author"
+              // fullWidth
+              margin="normal"
+              onBlur={(e) => this.handleChange(e)}
             />
-          </label>
 
-          <button onClick={this.submitPost}>
+          <TextField
+            id="content"
+            name="body"
+            label="Content"
+            placeholder="Content"
+            multiline
+            fullWidth
+            rows={2}
+            rowsMax={4}
+            onBlur={(e) => this.handleChange(e)}
+          />
+          <Button onClick={this.submitPost} variant="contained" color="primary">
             Send
-          </button>
+          </Button>
         </form>
       </div>
     )

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { editComment, rateComment, deleteComment } from '../actions/CommentAction'
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class Comment extends Component {
   constructor(props) {
@@ -60,8 +62,15 @@ class Comment extends Component {
     const {edit, body} = this.state
     return (
       <div>
-        <button onClick={ this.handleEdit }>Editar</button>
-        <button onClick = {this.handleDelete }> Excluir</button>
+        {/* <button onClick={ this.handleEdit }>Editar</button> */}
+        <Button size="medium" variant="outlined" onClick={this.handleEdit}>
+          Edit
+        </Button>
+        {/* <button onClick = {this.handleDelete }> Excluir</button> */}
+        <Button size="small" onClick = {this.handleDelete} variant="contained" color="secondary">
+            Delete
+          <DeleteIcon/>
+        </Button>
         <p>{ comment.author }</p>
         
         <div>
