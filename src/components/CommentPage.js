@@ -62,11 +62,9 @@ class Comment extends Component {
     const {edit, body} = this.state
     return (
       <div>
-        {/* <button onClick={ this.handleEdit }>Editar</button> */}
-        <Button size="medium" variant="outlined" onClick={this.handleEdit}>
+        <Button size="small" variant="outlined" onClick={this.handleEdit}>
           Edit
         </Button>
-        {/* <button onClick = {this.handleDelete }> Excluir</button> */}
         <Button size="small" onClick = {this.handleDelete} variant="contained" color="secondary">
             Delete
           <DeleteIcon/>

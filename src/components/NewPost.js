@@ -57,7 +57,6 @@ class NewPost extends Component {
             id="title"
             name="title"
             label="Title"
-            // fullWidth
             margin="normal"
             onBlur={(e) => this.handleChange(e)}
           />
@@ -78,7 +77,6 @@ class NewPost extends Component {
               id="author"
               name="author"
               label="Author"
-              // fullWidth
               margin="normal"
               onBlur={(e) => this.handleChange(e)}
             />

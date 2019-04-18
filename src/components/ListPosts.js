@@ -9,6 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
+import "../css/PostPage.css";
+import "../css/ListPosts.css";
 
 class Posts extends Component {
   state = {
@@ -39,13 +41,13 @@ class Posts extends Component {
      page = ( 
       <Fragment>
         {posts.sort(sortBy(order)).filter(post => post.deleted === false).map( post => (
-        <Card>
+        <Card style={{margin: "20px"}}>
           <CardContent>
-            <Typography color="textSecondary">
-              { post.category }
-            </Typography>
             <Typography variant="headline" component="h2">
               { post.title }
+            </Typography>
+            <Typography color="textSecondary">
+              { post.category }
             </Typography>
             <Typography color="textSecondary">
               { post.author }
@@ -72,15 +74,15 @@ class Posts extends Component {
     }
     return (
       <div className="App">
-        <div>
-          <button onClick={ () => this.changeOrder( '-voteScore' ) }>
+        <div className="list-order">
+          <Button onClick={() => this.changeOrder('-voteScore')} >
             Order by vote score
-          </button>
-          <button onClick={ () => this.changeOrder( 'title' ) }>
+          </Button>
+          <Button onClick={() => this.changeOrder('title')}>
             Order by title
-          </button>
+          </Button>
         </div>
-        <div>
+        <div className="card">
           {page}
         </div>
         <div>

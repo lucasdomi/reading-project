@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { fetchPostComments, newComment } from '../actions/CommentAction'
 import uuid from 'uuid'
 import CommentPage from './CommentPage';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button';
 
 class Comments extends Component {
 
@@ -65,21 +67,30 @@ class Comments extends Component {
       }
         <div>
           <form autoComplete="off">
-            <label>
-                Author:
-                <input type="text" name="author"  value={ this.state.comment.author }
-                  onChange={(e) => this.handleComment(e)}
-                  />
-            </label>
-            <label>
-                Content:
-                <textarea name="body" value={ this.state.comment.body }
-                  onChange={(e) => this.handleComment(e)}
-                />
-            </label>
-            <button onClick={(e) => this.sendComment(e)}>
+            <h3>New Comment</h3>
+            <TextField
+              id="author"
+              name="author"
+              label="Author"
+              // value={ this.state.comment.author }
+              // fullWidth
+              margin="normal"
+              onBlur={(e) => this.handleComment(e)}
+            />
+            <TextField
+              id="content"
+              name="body"
+              label="Content"
+              placeholder="Content"
+              // value={ this.state.comment.body }
+              multiline
+              rows={2}
+              rowsMax={4}
+              onBlur={(e) => this.handleComment(e)}
+            />
+            <Button variant="contained" size="small" color="primary" onClick={(e) => this.sendComment(e)}>
               Send
-            </button>
+            </Button>
           </form>
         </div>
       </div>
