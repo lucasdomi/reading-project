@@ -11,6 +11,7 @@ import Moment from 'react-moment';
 import "../css/Card.css";
 class PostPage extends Component {
 
+
   componentDidMount() {
     const { postId } = this.props.match.params
     !this.props.posts[postId] && this.props.fetchPost( postId )
@@ -35,7 +36,7 @@ class PostPage extends Component {
       page = (
         <div>
           <div>
-            <div class="title">
+            <div className="title">
               <h1 style={{marginTop: '15px'}}>{post.title}</h1>
               <Button size="small" variant="outlined" style={{margin: "5px"}}>
                 <Link to={`/post/edit/${post.id}`}>Edit</Link>

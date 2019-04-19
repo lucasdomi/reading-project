@@ -20,6 +20,7 @@ class CategoryPage extends Component {
 
   componentDidMount() {
     const { category } = this.props.match.params
+    console.log("my category",category)
     this.setState({
       category
     })
@@ -44,14 +45,6 @@ class CategoryPage extends Component {
     const categoryPosts = categoriesPosts[category]
     if ( this.hasPostOnCategory() ) {
       return (
-        //  <ul>
-        //   { categoryPosts.posts.sort(sortBy(order)).map( post => (
-        //     <li key={post.id}>
-        //       <Link to={`${category}/${post.id}`}> {post.title} </Link> - vote: { post.voteScore }
-        //     </li>
-        //   ))}
-        // </ul>
-        
         <List>
         {categoryPosts.posts.sort(sortBy(order)).map( post => (
           <ListItem style={{marginBottom: '10px', display: "flex",justifyContent: "center"}}>
