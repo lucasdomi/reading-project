@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
-import Moment from 'react-moment'
+import Moment from 'react-moment';
 import "../css/PostPage.css";
 import "../css/ListPosts.css";
 import "../css/Card.css";
@@ -48,24 +48,24 @@ class Posts extends Component {
               { post.title }
             </Typography>
             <Typography color="textSecondary">
-              { post.category } - 
-              <Moment
-              style={{marginLeft: "5px"}}
-              format="DD/MM/YYYY HH:mm">
-            {post.timestamp}
-          </Moment>
+              { post.category }
             </Typography>
             <Typography color="textSecondary">
-              { post.author }
+              { post.author } - 
+              <Moment
+                style={{marginLeft: "5px"}}
+                format="DD/MM/YYYY HH:mm">
+                {post.timestamp}
+              </Moment>
             </Typography>
             <Typography component="p">
               { post.body }
             </Typography>
-            <Typography component="p">
+            <Typography variant="caption">
               { post.commentCount } comments
             </Typography>
           </CardContent>
-          <CardActions className="card-action" style={{justifyContent: "space-between"}}>
+          <CardActions className="card-action">
             <Button component={Link} to ={`${post.category}/${post.id}`} color="primary" size="small">Read More</Button>
             <div className="voteScore" style={{display: "flex", alignItems: "center"}}>
               <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>

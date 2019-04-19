@@ -34,29 +34,34 @@ class PostPage extends Component {
     if ( post ) {
       page = (
         <div>
-          <h1>{post.title}</h1>
-          <Button size="medium" variant="outlined">
-            <Link to={`/post/edit/${post.id}`}>Edit</Link>
-          </Button>
-          <Button size="medium" onClick = {this.handleDelete} variant="contained" color="secondary">
-            Delete Post
-            <DeleteIcon/>
-          </Button>
-          <p>
-          {post.author} - created 
-          <Moment
-            style={{marginLeft: "5px"}}
-            format="DD/MM/YYYY HH:mm">
+          <div>
+            <div class="title">
+              <h1 style={{marginTop: '15px'}}>{post.title}</h1>
+              <Button size="small" variant="outlined" style={{margin: "5px"}}>
+                <Link to={`/post/edit/${post.id}`}>Edit</Link>
+              </Button>
+              <Button size="small" onClick = {this.handleDelete} variant="contained" color="secondary">
+                Delete Post
+                <DeleteIcon/>
+              </Button>
+            </div>
+            <p>{post.category}</p>
+            <p>
+            <b>Author:</b> {post.author} <b>- created </b>
+            <Moment
+              style={{marginLeft: "5px"}}
+              format="DD/MM/YYYY HH:mm">
+              
+              {post.timestamp}
+            </Moment>
+            </p>
             
-            {post.timestamp}
-          </Moment>
-          </p>
-          
-          <p>{ post.body }</p>
-          <div className="voteScore">
-            <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
-            <span>{ post.voteScore }</span>
-            <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
+            <p>{ post.body }</p>
+            <div className="voteScore">
+              <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
+              <span>{ post.voteScore }</span>
+              <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
+            </div>
           </div>
           <Comment postId={ post.id } />
         </div>

@@ -5,6 +5,9 @@ import { ThumbUp, ThumbDown } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Moment from 'react-moment';
+import '../css/PostPage.css';
+import TextField from '@material-ui/core/TextField'
+
 class Comment extends Component {
   constructor(props) {
     super(props)
@@ -62,13 +65,7 @@ class Comment extends Component {
     const {edit, body} = this.state
     return (
       <div>
-        <Button size="small" variant="outlined" onClick={this.handleEdit}>
-          Edit
-        </Button>
-        <Button size="small" onClick = {this.handleDelete} variant="contained" color="secondary">
-            Delete
-          <DeleteIcon/>
-        </Button>
+        <div className="title">
         <p>
           {comment.author} - created 
           <Moment
@@ -78,17 +75,33 @@ class Comment extends Component {
             {comment.timestamp}
           </Moment>
           </p>
+          <Button size="small" variant="outlined" onClick={this.handleEdit} style={{margin: "3px"}}>
+          Edit
+        </Button>
+        <Button size="small" onClick = {this.handleDelete} variant="contained" color="secondary">
+            Delete
+          <DeleteIcon/>
+        </Button>
+        </div>
           { edit ?
-        <div>
-            <label>
-              Content:
-              <textarea value={ body }
-                onChange={(e) => this.handleCommentBody(e)}
+        <div style={{    display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'}}>
+
+            <TextField
+                id="content"
+                name="body"
+                label="Content"
+                placeholder="Content"
+                multiline
+                defaultValue ={body}
+                rows={2}
+                rowsMax={4}
+                onBlur={(e) => this.handleCommentBody(e)}
               />
-            </label>
-            <button onClick={this.submitComment}>
-              Confirmar 
-            </button> 
+            <Button style={{marginTop: "15px", marginBottom: "10px"}}variant="contained" size="small" color="primary" onClick={this.submitComment}>
+                Send
+            </Button> 
           </div> :
           <p>{comment.body}</p>
         }

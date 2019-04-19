@@ -34,6 +34,9 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen
     })
   },
+  grow: {
+    flexGrow: 1,
+  },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
@@ -122,7 +125,7 @@ class MenuDrawer extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant="h6" color="inherit" className={classes.grow} style={{textAlign: 'left'}}>
               {namePage}
             </Typography>
             {newPost && 

@@ -64,7 +64,8 @@ class EditPost extends Component {
 
   submitPost = event => {
     const { post } = this.state
-    this.props.editPost( post )
+    this.props.editPost(post)
+    this.props.history.push('/')
   }
 
   render () {
@@ -84,7 +85,7 @@ class EditPost extends Component {
             fullWidth
             margin="normal"
             value={this.state.post.title}
-            onBlur={(e) => this.handleChange(e)}
+            onChange={(e) => this.handleChange(e)}
           />
           {/* <label>
             Title:
@@ -125,7 +126,7 @@ class EditPost extends Component {
               label="Author"
               margin="normal"
               value={this.state.post.author || ''}
-              onBlur={(e) => this.handleChange(e)}
+              onChange={(e) => this.handleChange(e)}
             />
           <TextField
             id="content"
@@ -137,7 +138,7 @@ class EditPost extends Component {
             value={this.state.post.body || ''}
             rows={2}
             rowsMax={4}
-            onBlur={(e) => this.handleChange(e)}
+            onChange={(e) => this.handleChange(e)}
           />
           <Button style={{marginTop: '15px', marginBottom: '10px'}} onClick={this.submitPost} variant="contained" color="primary">
             Send
