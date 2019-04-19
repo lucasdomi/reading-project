@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
+import Moment from 'react-moment'
 import "../css/PostPage.css";
 import "../css/ListPosts.css";
 import "../css/Card.css";
@@ -47,7 +48,12 @@ class Posts extends Component {
               { post.title }
             </Typography>
             <Typography color="textSecondary">
-              { post.category }
+              { post.category } - 
+              <Moment
+              style={{marginLeft: "5px"}}
+              format="DD/MM/YYYY HH:mm">
+            {post.timestamp}
+          </Moment>
             </Typography>
             <Typography color="textSecondary">
               { post.author }

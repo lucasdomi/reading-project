@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
-import { fetchCategoryPosts } from '../actions/CategoryAction'
+import { fetchCategoryPosts, fetchCategories } from '../actions/CategoryAction'
 import sortBy from 'sort-by';
 import MenuDrawer from './MenuDrawer';
 import Button from '@material-ui/core/Button';
@@ -73,15 +73,18 @@ class CategoryPage extends Component {
   }
 }
 
-const mapStateToProps = ({ categoriesPosts }) => {
+const mapStateToProps = ({ categoriesPosts, categories }) => {
   return {
     categoriesPosts,
+    categories,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchCategoryPosts: ( category ) => dispatch( fetchCategoryPosts( category ) ),
+    fetchCategories: () => dispatch(fetchCategories()),
+
   }
 }
 
