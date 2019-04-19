@@ -42,7 +42,7 @@ class Posts extends Component {
      page = ( 
       <Fragment>
         {posts.sort(sortBy(order)).filter(post => post.deleted === false).map( post => (
-        <Card style={{margin: "20px"}}>
+        <Card style={{margin: "20px", minWidth: "330px", maxWidth: "370px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
           <CardContent>
             <Typography variant="headline" component="h2">
               { post.title }
