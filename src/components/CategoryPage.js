@@ -5,6 +5,12 @@ import { fetchCategoryPosts, fetchCategories } from '../actions/CategoryAction'
 import sortBy from 'sort-by';
 import MenuDrawer from './MenuDrawer';
 import Button from '@material-ui/core/Button';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import List from "@material-ui/core/List";
+import "../css/PostPage.css";
+import "../css/ListPosts.css";
+import "../css/Card.css";
 
 class CategoryPage extends Component {
   state = {
@@ -35,17 +41,27 @@ class CategoryPage extends Component {
   infoCategories () {
     const { categoriesPosts } = this.props
     const { category, order } = this.state
-    console.log("minha categoria",category)
     const categoryPosts = categoriesPosts[category]
     if ( this.hasPostOnCategory() ) {
       return (
-         <ul>
-          { categoryPosts.posts.sort(sortBy(order)).map( post => (
-            <li key={post.id}>
-              <Link to={`${category}/${post.id}`}> {post.title} </Link> - vote: { post.voteScore }
-            </li>
-          ))}
-        </ul>
+        //  <ul>
+        //   { categoryPosts.posts.sort(sortBy(order)).map( post => (
+        //     <li key={post.id}>
+        //       <Link to={`${category}/${post.id}`}> {post.title} </Link> - vote: { post.voteScore }
+        //     </li>
+        //   ))}
+        // </ul>
+        
+        <List>
+        {categoryPosts.posts.sort(sortBy(order)).map( post => (
+          <ListItem style={{marginBottom: '10px', display: "flex",justifyContent: "center"}}>
+            <div className="list-order" style={{ flexDirection: "column", alignItems: "center"}}>
+              <Link to={`${category}/${post.id}`}> {post.title} </Link> 
+              <span>Vote Score: { post.voteScore }</span>
+            </div>
+          </ListItem>
+        ))}
+        </List>
       )
     }
     else {
@@ -58,16 +74,20 @@ class CategoryPage extends Component {
   render() {
     const { category, order } = this.state
     return (
-      <div className="App">
+      <div>
         <MenuDrawer category={category} backToHome/>
-        <h1>{category && category}</h1>
-        <Button onClick={() => this.changeOrder('-voteScore')} >
-          Order by vote score
-        </Button>
-        <Button onClick={() => this.changeOrder('title')}>
-          Order by title
-        </Button>
-        { this.infoCategories() }
+        <div className="list-order">
+          <Button onClick={() => this.changeOrder('-voteScore')} >
+            Order by vote score
+          </Button>
+          <Button onClick={() => this.changeOrder('title')}>
+            Order by title
+          </Button>
+        </div>
+        <div className="list-order">
+          { this.infoCategories() }
+        </div>
+
       </div>
     );
   }

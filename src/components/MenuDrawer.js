@@ -130,17 +130,17 @@ class MenuDrawer extends React.Component {
             </Typography>
             {newPost && 
               <Link to={newPost}>
-                <Button variant="fab" color="primary" aria-label="NewPost">
+                <Button variant="fab" color="primary" aria-label="NewPost" style={{marginRight: "25px"}}>
                   <AddIcon />
                 </Button>
               </Link>
             }
             {category && 
-              <span>{category}</span>
+              <span style={{textAlign: 'left', flexGrow: "150"}}>{category}</span>
             } 
             {backToHome &&
             <Link to="/">
-              <Button color="primary" aria-label="NewPost">
+              <Button variant="fab" color="primary" aria-label="NewPost" style={{marginRight: "25px"}}>
                 <ComeBack />
               </Button>
             </Link>
