@@ -55,42 +55,49 @@ class Comments extends Component {
 
   render() {
     const comments = this.postComments()
+    console.log("meus comments",comments)
     return (
       <div className="comments">
         <h1>Comments</h1>
-          { comments && comments.filter( comment => comment.deleted === false).map( comment => (
-          <CommentPage
-            key={ comment.id }
-            comment={ comment }
-          />
-        ))
-      }
+          <div>
+          { comments && comments.length !== 0 ? comments.filter( comment => comment.deleted === false).map( comment => (
+            <CommentPage
+              key={ comment.id }
+              comment={ comment }
+            />
+            ))
+            : 
+            <p>Dont comments :( Add!</p> 
+          }
+          </div>
         <div>
           <form autoComplete="off">
-            <h3>New Comment</h3>
-            <TextField
-              id="author"
-              name="author"
-              label="Author"
-              // value={ this.state.comment.author }
-              // fullWidth
-              margin="normal"
-              onBlur={(e) => this.handleComment(e)}
-            />
-            <TextField
-              id="content"
-              name="body"
-              label="Content"
-              placeholder="Content"
-              // value={ this.state.comment.body }
-              multiline
-              rows={2}
-              rowsMax={4}
-              onBlur={(e) => this.handleComment(e)}
-            />
-            <Button variant="contained" size="small" color="primary" onClick={(e) => this.sendComment(e)}>
-              Send
-            </Button>
+            <h2>New Comment</h2>
+            <div style={{    display: "flex",
+    flexDirection: "column",
+    justifyContent: "start",
+    alignItems: "center"}}>
+              <TextField
+                id="author"
+                name="author"
+                label="Author"
+                margin="normal"
+                onBlur={(e) => this.handleComment(e)}
+              />
+              <TextField
+                id="content"
+                name="body"
+                label="Content"
+                placeholder="Content"
+                multiline
+                rows={2}
+                rowsMax={4}
+                onBlur={(e) => this.handleComment(e)}
+              />
+              <Button style={{marginTop: "15px", marginBottom: "10px"}}variant="contained" size="small" color="primary" onClick={(e) => this.sendComment(e)}>
+                Send
+              </Button>
+            </div>
           </form>
         </div>
       </div>

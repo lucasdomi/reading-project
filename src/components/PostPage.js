@@ -6,7 +6,9 @@ import Comment from "./ListComments";
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import MenuDrawer from './MenuDrawer';
+import Moment from 'react-moment';
+import "../css/Card.css";
 class PostPage extends Component {
 
   componentDidMount() {
@@ -40,10 +42,18 @@ class PostPage extends Component {
             Delete Post
             <DeleteIcon/>
           </Button>
-          <p>{post.author}</p>
-          {post.timestamp}
+          <p>
+          {post.author} - created 
+          <Moment
+            style={{marginLeft: "5px"}}
+            format="DD/MM/YYYY HH:mm">
+            
+            {post.timestamp}
+          </Moment>
+          </p>
+          
           <p>{ post.body }</p>
-          <div>
+          <div className="voteScore">
             <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
             <span>{ post.voteScore }</span>
             <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
@@ -55,6 +65,7 @@ class PostPage extends Component {
     return (
       <div>
         <div className="App">
+          <MenuDrawer namePage="Post details" backToHome/>
           { page }
         </div>
       </div>

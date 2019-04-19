@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import { fetchCategoryPosts } from '../actions/CategoryAction'
 import sortBy from 'sort-by';
+import MenuDrawer from './MenuDrawer';
+import Button from '@material-ui/core/Button';
 
 class CategoryPage extends Component {
   state = {
@@ -33,6 +35,7 @@ class CategoryPage extends Component {
   infoCategories () {
     const { categoriesPosts } = this.props
     const { category, order } = this.state
+    console.log("minha categoria",category)
     const categoryPosts = categoriesPosts[category]
     if ( this.hasPostOnCategory() ) {
       return (
@@ -53,14 +56,17 @@ class CategoryPage extends Component {
   }
 
   render() {
+    const { category, order } = this.state
     return (
       <div className="App">
-        <button onClick={ () => this.changeOrder( '-voteScore' ) }>
+        <MenuDrawer category={category} backToHome/>
+        <h1>{category && category}</h1>
+        <Button onClick={() => this.changeOrder('-voteScore')} >
           Order by vote score
-        </button>
-        <button onClick={ () => this.changeOrder( 'title' ) }>
+        </Button>
+        <Button onClick={() => this.changeOrder('title')}>
           Order by title
-        </button>
+        </Button>
         { this.infoCategories() }
       </div>
     );

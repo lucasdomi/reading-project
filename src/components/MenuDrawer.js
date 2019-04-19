@@ -16,15 +16,11 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import { connect } from 'react-redux'; 
 import {Link} from 'react-router-dom'
 import {fetchCategories} from '../actions/CategoryAction'
-import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import ComeBack from '@material-ui/icons/ArrowBackIos'
 
 const drawerWidth = 240;
 
@@ -103,13 +99,14 @@ class MenuDrawer extends React.Component {
   };
 
   render() {
-    const { classes, theme, namePage, categories } = this.props;
+    const { classes, theme, namePage, categories, newPost, backToHome,category } = this.props;
     const { open } = this.state;
 
     return (
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
+          style={{backgroundColor: "black"}}
 					position="fixed"
 					color = "secondary"
           className={classNames(classes.appBar, {
@@ -128,9 +125,23 @@ class MenuDrawer extends React.Component {
             <Typography variant="h6" color="inherit" noWrap>
               {namePage}
             </Typography>
-						<Fab color="primary" size="small" aria-label="Add" className={classes.fab}>
-        			<AddIcon />
-      			</Fab>
+            {newPost && 
+              <Link to={newPost}>
+                <Button variant="fab" color="primary" aria-label="NewPost">
+                  <AddIcon />
+                </Button>
+              </Link>
+            }
+            {category && 
+              <span>{category}</span>
+            } 
+            {backToHome &&
+            <Link to="/">
+              <Button color="primary" aria-label="NewPost">
+                <ComeBack />
+              </Button>
+            </Link>
+            }
           </Toolbar>
         </AppBar>
         <Drawer

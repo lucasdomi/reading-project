@@ -1,5 +1,5 @@
 .card {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  padding: 50px; }
+  justify-content: space-evenly;
+  padding: 20px; }

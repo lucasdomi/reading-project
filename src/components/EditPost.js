@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import { editPost } from '../actions/PostActions'
 import { fetchCategories } from '../actions/CategoryAction'
 import { connect } from 'react-redux'
-
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
+import Button from '@material-ui/core/Button';
+import MenuDrawer from './MenuDrawer';
 class EditPost extends Component {
   state = {
     post : {
@@ -65,15 +70,30 @@ class EditPost extends Component {
   render () {
     return (
       <div>
-        <form autoComplete="off">
-          <label>
+        <MenuDrawer namePage="Edit Post" backToHome/>
+        <form autoComplete="off" style={{
+          padding: "20px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}>
+          <TextField
+            id="title"
+            name="title"
+            label="Title"
+            fullWidth
+            margin="normal"
+            value={this.state.post.title}
+            onBlur={(e) => this.handleChange(e)}
+          />
+          {/* <label>
             Title:
             <input type="text" name="title" value={this.state.post.title}
               onChange={(e) => this.handleChange(e)}
             />
-          </label>
+          </label> */}
 
-          <label>
+          {/* <label>
             Category:
             <select
               name="category" 
@@ -82,25 +102,46 @@ class EditPost extends Component {
             >
               {this.fetchCategories()}
             </select>
-          </label>
-          
-          <label>
-            Author:
-            <input type="text" name="author" value={this.state.post.author || ''}
-              onChange={(e) => this.handleChange(e)}
-              />
-          </label>
+          </label> */}
 
-          <label>
-            Content:
-            <textarea name="body" value={this.state.post.body || ''}
+          <FormControl fullWidth>
+            <InputLabel htmlFor="category">Category</InputLabel>
+            <Select
+              value={this.state.post.category}
               onChange={(e) => this.handleChange(e)}
+              inputProps={{
+                name: 'category',
+                id: 'category',
+              }}
+            >
+              { this.fetchCategories() }
+            </Select>
+          </FormControl>
+        
+          <TextField
+              id="author"
+              name="author"
+              fullWidth
+              label="Author"
+              margin="normal"
+              value={this.state.post.author || ''}
+              onBlur={(e) => this.handleChange(e)}
             />
-          </label>
-
-          <button onClick={this.submitPost}>
+          <TextField
+            id="content"
+            name="body"
+            label="Content"
+            placeholder="Content"
+            multiline
+            fullWidth
+            value={this.state.post.body || ''}
+            rows={2}
+            rowsMax={4}
+            onBlur={(e) => this.handleChange(e)}
+          />
+          <Button style={{marginTop: '15px', marginBottom: '10px'}} onClick={this.submitPost} variant="contained" color="primary">
             Send
-          </button>
+          </Button>
         </form>
       </div>
     )

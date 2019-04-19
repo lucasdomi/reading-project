@@ -4,7 +4,7 @@ import { editComment, rateComment, deleteComment } from '../actions/CommentActio
 import { ThumbUp, ThumbDown } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import Moment from 'react-moment';
 class Comment extends Component {
   constructor(props) {
     super(props)
@@ -69,15 +69,16 @@ class Comment extends Component {
             Delete
           <DeleteIcon/>
         </Button>
-        <p>{ comment.author }</p>
-        
-        <div>
-          <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
-          <span>Votes:{ comment.voteScore }</span>
-          <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
-        </div>
-        <p>{comment.timestamp}</p>
-        { edit ?
+        <p>
+          {comment.author} - created 
+          <Moment
+            style={{marginLeft: "5px"}}
+            format="DD/MM/YYYY HH:mm">
+            
+            {comment.timestamp}
+          </Moment>
+          </p>
+          { edit ?
         <div>
             <label>
               Content:
@@ -89,7 +90,13 @@ class Comment extends Component {
               Confirmar 
             </button> 
           </div> :
-          <p>{comment.body}</p>}
+          <p>{comment.body}</p>
+        }
+        <div className="voteScore">
+          <span>Votes:{ comment.voteScore }</span>
+          <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
+          <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
+        </div>
         </div>
     )
   }

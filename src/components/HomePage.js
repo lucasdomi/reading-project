@@ -8,7 +8,7 @@ class HomePage extends React.Component {
   render () {
     return (
       <div>
-        <MenuDrawer namePage="Posts" createPost/>
+        <MenuDrawer namePage="Posts" newPost="/post/create"/>
         {/* <Categories/> */}
         <Posts/>
       </div>

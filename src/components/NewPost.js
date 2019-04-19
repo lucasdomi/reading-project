@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button';
-
+import MenuDrawer from './MenuDrawer'
 class NewPost extends Component {
   state = {
     post : {
@@ -52,10 +52,17 @@ class NewPost extends Component {
   render () {
     return (
       <div>
-        <form autoComplete="off">
+        <MenuDrawer namePage="New Post" backToHome/>
+        <form autoComplete="off" style={{
+          padding: "20px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}>
           <TextField
             id="title"
             name="title"
+            fullWidth
             label="Title"
             margin="normal"
             onBlur={(e) => this.handleChange(e)}
@@ -77,6 +84,7 @@ class NewPost extends Component {
               id="author"
               name="author"
               label="Author"
+              fullWidth
               margin="normal"
               onBlur={(e) => this.handleChange(e)}
             />
@@ -92,7 +100,7 @@ class NewPost extends Component {
             rowsMax={4}
             onBlur={(e) => this.handleChange(e)}
           />
-          <Button onClick={this.submitPost} variant="contained" color="primary">
+          <Button style={{marginTop: '15px', marginBottom: '10px'}} onClick={this.submitPost} variant="contained" color="primary">
             Send
           </Button>
         </form>

@@ -1,0 +1,13 @@
+.voteScore {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  & span {
+    font-size: 18px;
+    margin: 3px;
+  }
+}
+
+.card-action {
+  justify-content: "space-between"
+}

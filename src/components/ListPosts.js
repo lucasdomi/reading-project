@@ -11,7 +11,7 @@ import { ThumbUp, ThumbDown } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
 import "../css/PostPage.css";
 import "../css/ListPosts.css";
-
+import "../css/Card.css";
 class Posts extends Component {
   state = {
     order: '-voteScore'
@@ -59,11 +59,11 @@ class Posts extends Component {
               { post.commentCount } comments
             </Typography>
           </CardContent>
-          <CardActions>
+          <CardActions className="card-action" style={{justifyContent: "space-between"}}>
             <Button component={Link} to ={`${post.category}/${post.id}`} color="primary" size="small">Read More</Button>
-            <div>
+            <div className="voteScore" style={{display: "flex", alignItems: "center"}}>
               <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
-              <span>{ post.voteScore }</span>
+              <span style={{fontSize: "18px", margin:"3px"}}>{ post.voteScore }</span>
               <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
             </div>
           </CardActions>
@@ -84,9 +84,6 @@ class Posts extends Component {
         </div>
         <div className="card">
           {page}
-        </div>
-        <div>
-          <Link to={'/post/create'}>New Post</Link>
         </div>
       </div>
     );
