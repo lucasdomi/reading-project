@@ -15,14 +15,6 @@ export const getPost = postId => (
     .then( res => res.data )
 )
 
-// export const addPost = post => (
-//   axios.post ( `${ apiUrl }/posts`, {
-//     headers: { ...headers, 'Content-Type': 'application/json' },
-//     body: JSON.stringify(post),
-//   })
-//   .then(res => res.data)
-// )
-
 export const addPost = post => (
   fetch ( `${apiUrl}/posts`, {
     method: 'POST',

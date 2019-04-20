@@ -31,7 +31,6 @@ class PostPage extends Component {
   render() {
     const { postId } = this.props.match.params
     const post = this.props.posts[postId]
-    console.log("meu post",post && post.category);
     let page = (<p>No posts found</p>)
     if ( post ) {
       page = (

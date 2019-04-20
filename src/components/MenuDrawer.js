@@ -108,7 +108,6 @@ class MenuDrawer extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        {console.log(categories)}
         <AppBar
           style={{backgroundColor: "black"}}
 					position="fixed"
@@ -179,7 +178,6 @@ class MenuDrawer extends React.Component {
           <List>
             {categories.items.map(category => (
               <ListItem button key={category.path}>
-                {console.log(category)}
 								<Link to ={category.path}>{category.name}</Link>
               </ListItem>
             ))}
@@ -216,6 +214,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default withStyles(styles, { withTheme: true })(MenuDrawer);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(MenuDrawer));

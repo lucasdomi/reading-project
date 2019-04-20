@@ -21,7 +21,6 @@ class EditPost extends Component {
   componentDidMount() {
     !this.props.categories.items.length && this.props.fetchCategories()
     const { postId } = this.props.match.params
-    console.log(this.props)
     const post = this.props.posts[postId]
     if (post) {
       this.setState({
@@ -87,24 +86,6 @@ class EditPost extends Component {
             value={this.state.post.title}
             onChange={(e) => this.handleChange(e)}
           />
-          {/* <label>
-            Title:
-            <input type="text" name="title" value={this.state.post.title}
-              onChange={(e) => this.handleChange(e)}
-            />
-          </label> */}
-
-          {/* <label>
-            Category:
-            <select
-              name="category" 
-              value={this.state.post.category || ''} 
-              onChange={(e) => this.handleChange(e)}
-            >
-              {this.fetchCategories()}
-            </select>
-          </label> */}
-
           <FormControl fullWidth>
             <InputLabel htmlFor="category">Category</InputLabel>
             <Select
@@ -147,7 +128,6 @@ class EditPost extends Component {
       </div>
     )
   }
-
 }
 
 const mapStateToProps = ({ categories, posts }) => {

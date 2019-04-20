@@ -41,7 +41,6 @@ class Comment extends Component {
   }
 
   handleVote = vote => {
-    console.log(this.props.comment.id)
     this.props.rateComment(this.props.comment.id, vote)
   }
 
