@@ -20,7 +20,6 @@ class CategoryPage extends Component {
 
   componentDidMount() {
     const { category } = this.props.match.params
-    console.log("my category",category)
     this.setState({
       category
     })

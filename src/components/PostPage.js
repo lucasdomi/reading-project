@@ -31,6 +31,7 @@ class PostPage extends Component {
   render() {
     const { postId } = this.props.match.params
     const post = this.props.posts[postId]
+    console.log("meu post",post && post.category);
     let page = (<p>No posts found</p>)
     if ( post ) {
       page = (
@@ -71,7 +72,10 @@ class PostPage extends Component {
     return (
       <div>
         <div className="App">
-          <MenuDrawer namePage="Post details" backToHome/>
+          {post ?
+          <MenuDrawer namePage="Post details" editPost backPost={post.category}/>
+          : 
+          <MenuDrawer namePage="Post details" backToHome editPost />}
           { page }
         </div>
       </div>

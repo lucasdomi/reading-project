@@ -102,12 +102,13 @@ class MenuDrawer extends React.Component {
   };
 
   render() {
-    const { classes, theme, namePage, categories, newPost, backToHome,category } = this.props;
+    const { classes, theme, namePage, categories, newPost, backToHome,category,editPost,backPost } = this.props;
     const { open } = this.state;
 
     return (
       <div className={classes.root}>
         <CssBaseline />
+        {console.log(categories)}
         <AppBar
           style={{backgroundColor: "black"}}
 					position="fixed"
@@ -117,6 +118,7 @@ class MenuDrawer extends React.Component {
           })}
         >
           <Toolbar disableGutters={!open}>
+            {!editPost && 
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -125,6 +127,7 @@ class MenuDrawer extends React.Component {
             >
               <MenuIcon />
             </IconButton>
+            }
             <Typography variant="h6" color="inherit" className={classes.grow} style={{textAlign: 'left'}}>
               {namePage}
             </Typography>
@@ -141,6 +144,13 @@ class MenuDrawer extends React.Component {
             {backToHome &&
             <Link to="/">
               <Button variant="fab" color="primary" aria-label="NewPost" style={{marginRight: "25px"}}>
+                <ComeBack />
+              </Button>
+            </Link>
+            }
+            {backPost &&
+              <Link to={`/${backPost}`}>
+              <Button variant="fab" color="primary" aria-label="BackPost" style={{marginRight: "25px"}}>
                 <ComeBack />
               </Button>
             </Link>
@@ -169,6 +179,7 @@ class MenuDrawer extends React.Component {
           <List>
             {categories.items.map(category => (
               <ListItem button key={category.path}>
+                {console.log(category)}
 								<Link to ={category.path}>{category.name}</Link>
               </ListItem>
             ))}

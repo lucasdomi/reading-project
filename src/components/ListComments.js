@@ -55,7 +55,6 @@ class Comments extends Component {
 
   render() {
     const comments = this.postComments()
-    console.log("meus comments",comments)
     return (
       <div className="comments">
         <h1>Comments</h1>
@@ -73,10 +72,11 @@ class Comments extends Component {
         <div>
           <form autoComplete="off">
             <h2>New Comment</h2>
-            <div style={{    display: "flex",
-    flexDirection: "column",
-    justifyContent: "start",
-    alignItems: "center"}}>
+            <div style={{display: "flex",
+              flexDirection: "column",
+              justifyContent: "start",
+              alignItems: "center"
+            }}>
               <TextField
                 id="author"
                 name="author"
