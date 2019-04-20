@@ -55,18 +55,18 @@ class Comments extends Component {
 
   render() {
     const comments = this.postComments()
+    const commentsCount = comments && comments.length;
     return (
       <div className="comments">
-        <h1>Comments</h1>
           <div>
-          { comments && comments.length !== 0 ? comments.filter( comment => comment.deleted === false).map( comment => (
+          <h1> {commentsCount} Comments</h1>
+          { (comments && comments.length !== 0) && comments.filter( comment => comment.deleted === false).map( comment => (
+            
             <CommentPage
               key={ comment.id }
               comment={ comment }
             />
-            ))
-            : 
-            <p>Dont comments :( Add!</p> 
+            )) 
           }
           </div>
         <div>

@@ -14,8 +14,8 @@ import "../css/ListPosts.css";
 import "../css/PostPage.css";
 
 class CardComponent extends Component {
-  handleVote = vote => {
     
+  handleVote = vote => {
     const { id } = this.props.post
     console.log("teste de props",id)
     this.props.ratePost(id, vote)
@@ -49,10 +49,10 @@ class CardComponent extends Component {
         </CardContent>
         <CardActions className="card-action">
           <Button component={Link} to ={`${post.category}/${post.id}`} color="primary" size="small">Read More</Button>
-          <div className="voteScore" style={{display: "flex", alignItems: "center"}}>
-            <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
-            <span style={{fontSize: "18px", margin:"3px"}}>{ post.voteScore }</span>
-            <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
+          <div className="voteScore">
+            <ThumbUp onClick = { () => this.handleVote('upVote')} className="vote-positive"/>
+            <span>{ post.voteScore }</span>
+            <ThumbDown onClick = { () => this.handleVote('downVote')} className="vote-negative" />
           </div>
         </CardActions>
       </Card>
