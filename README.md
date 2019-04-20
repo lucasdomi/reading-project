@@ -20,3 +20,4 @@ yarn start
 
 After running the project, it is necessary to run a project with an api with the data, found [here](https://github.com/udacity/reactnd-project-readable-starter) 
 
+Para rodar o projeto, execute o comando ``node server.js`` dentro da pasta api-server
