@@ -9,6 +9,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MenuDrawer from './MenuDrawer';
 import Moment from 'react-moment';
 import "../css/Card.css";
+import "../css/PostPage.css";
+
 class PostPage extends Component {
 
 
@@ -37,8 +39,8 @@ class PostPage extends Component {
         <div>
           <div>
             <div className="title">
-              <h1 style={{marginTop: '15px'}}>{post.title}</h1>
-              <Button size="small" variant="outlined" style={{margin: "5px"}}>
+              <h1 className="title-post" >{post.title}</h1>
+              <Button size="small" variant="outlined" className="space">
                 <Link to={`/post/edit/${post.id}`}>Edit</Link>
               </Button>
               <Button size="small" onClick = {this.handleDelete} variant="contained" color="secondary">
@@ -50,18 +52,17 @@ class PostPage extends Component {
             <p>
             <b>Author:</b> {post.author} <b>- created </b>
             <Moment
-              style={{marginLeft: "5px"}}
+              className="space"
               format="DD/MM/YYYY HH:mm">
-              
               {post.timestamp}
             </Moment>
             </p>
             
             <p>{ post.body }</p>
             <div className="voteScore">
-              <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
+              <ThumbUp onClick = { () => this.handleVote('upVote')} className="vote-positive"/>
               <span>{ post.voteScore }</span>
-              <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
+              <ThumbDown onClick = { () => this.handleVote('downVote')} className="vote-negative" />
             </div>
           </div>
           <Comment postId={ post.id } />

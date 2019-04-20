@@ -6,7 +6,6 @@ import sortBy from 'sort-by';
 import MenuDrawer from './MenuDrawer';
 import Button from '@material-ui/core/Button';
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import "../css/PostPage.css";
 import "../css/ListPosts.css";
@@ -64,7 +63,7 @@ class CategoryPage extends Component {
   }
 
   render() {
-    const { category, order } = this.state
+    const { category } = this.state
     return (
       <div>
         <MenuDrawer category={category} backToHome/>

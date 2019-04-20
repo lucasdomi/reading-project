@@ -9,6 +9,8 @@ import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button';
 import MenuDrawer from './MenuDrawer'
+import "../css/PostPage.css"
+
 class NewPost extends Component {
   state = {
     post : {
@@ -53,12 +55,7 @@ class NewPost extends Component {
     return (
       <div>
         <MenuDrawer namePage="New Post" backToHome/>
-        <form autoComplete="off" style={{
-          padding: "20px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}>
+        <form className="form-post" autoComplete="off">
           <TextField
             id="title"
             name="title"
@@ -100,7 +97,7 @@ class NewPost extends Component {
             rowsMax={4}
             onBlur={(e) => this.handleChange(e)}
           />
-          <Button style={{marginTop: '15px', marginBottom: '10px'}} onClick={this.submitPost} variant="contained" color="primary">
+          <Button className="button-send-post" onClick={this.submitPost} variant="contained" color="primary">
             Send
           </Button>
         </form>

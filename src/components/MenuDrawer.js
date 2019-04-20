@@ -21,6 +21,7 @@ import {Link} from 'react-router-dom'
 import {fetchCategories} from '../actions/CategoryAction'
 import AddIcon from '@material-ui/icons/Add';
 import ComeBack from '@material-ui/icons/ArrowBackIos'
+import "../css/MenuDrawer.css";
 
 const drawerWidth = 240;
 
@@ -36,6 +37,7 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
+    textAlign: 'left',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -111,7 +113,6 @@ class MenuDrawer extends React.Component {
         <AppBar
           style={{backgroundColor: "black"}}
 					position="fixed"
-					color = "secondary"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open
           })}
@@ -127,29 +128,29 @@ class MenuDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             }
-            <Typography variant="h6" color="inherit" className={classes.grow} style={{textAlign: 'left'}}>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
               {namePage}
             </Typography>
             {newPost && 
               <Link to={newPost}>
-                <Button variant="fab" color="primary" aria-label="NewPost" style={{marginRight: "25px"}}>
+                <Button variant="fab" color="primary" aria-label="NewPost" className="space-rigth" >
                   <AddIcon />
                 </Button>
               </Link>
             }
             {category && 
-              <span style={{textAlign: 'left', flexGrow: "150"}}>{category}</span>
+              <span className="category">{category}</span>
             } 
             {backToHome &&
             <Link to="/">
-              <Button variant="fab" color="primary" aria-label="NewPost" style={{marginRight: "25px"}}>
+              <Button className="space-rigth"variant="fab" color="primary" aria-label="NewPost"  >
                 <ComeBack />
               </Button>
             </Link>
             }
             {backPost &&
               <Link to={`/${backPost}`}>
-              <Button variant="fab" color="primary" aria-label="BackPost" style={{marginRight: "25px"}}>
+              <Button variant="fab" color="primary" aria-label="BackPost" className="space-rigth">
                 <ComeBack />
               </Button>
             </Link>

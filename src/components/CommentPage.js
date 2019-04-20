@@ -106,8 +106,8 @@ class Comment extends Component {
         }
         <div className="voteScore">
           <span>Votes:{ comment.voteScore }</span>
-          <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
-          <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
+          <ThumbUp onClick = { () => this.handleVote('upVote')} className="vote-positive" />
+          <ThumbDown onClick = { () => this.handleVote('downVote')} className="vote-negative" />
         </div>
         </div>
     )
