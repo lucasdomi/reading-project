@@ -1,18 +1,12 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchPosts } from '../actions/PostActions';
-import {Link} from 'react-router-dom';
 import sortBy from 'sort-by'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { ThumbUp, ThumbDown } from '@material-ui/icons'
+import Card from '../components/Card';
 import Button from '@material-ui/core/Button';
-import Moment from 'react-moment';
 import "../css/PostPage.css";
 import "../css/ListPosts.css";
-import "../css/Card.css";
+
 class Posts extends Component {
   state = {
     order: '-voteScore'
@@ -39,44 +33,13 @@ class Posts extends Component {
     const { order } = this.state
     let page = ''
     if (posts.length) {
-     page = ( 
-      <Fragment>
-        {posts.sort(sortBy(order)).filter(post => post.deleted === false).map( post => (
-        <Card style={{margin: "20px", minWidth: "330px", maxWidth: "370px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
-          <CardContent>
-            <Typography variant="headline" component="h2">
-              { post.title }
-            </Typography>
-            <Typography color="textSecondary">
-              { post.category }
-            </Typography>
-            <Typography color="textSecondary">
-              { post.author } - 
-              <Moment
-                style={{marginLeft: "5px"}}
-                format="DD/MM/YYYY HH:mm">
-                {post.timestamp}
-              </Moment>
-            </Typography>
-            <Typography component="p">
-              { post.body }
-            </Typography>
-            <Typography variant="caption">
-              { post.commentCount } comments
-            </Typography>
-          </CardContent>
-          <CardActions className="card-action">
-            <Button component={Link} to ={`${post.category}/${post.id}`} color="primary" size="small">Read More</Button>
-            <div className="voteScore" style={{display: "flex", alignItems: "center"}}>
-              <ThumbUp onClick = { () => this.handleVote('upVote')} style={{ color: 'green'}}/>
-              <span style={{fontSize: "18px", margin:"3px"}}>{ post.voteScore }</span>
-              <ThumbDown onClick = { () => this.handleVote('downVote')} style={{ color: 'red' }} />
-            </div>
-          </CardActions>
-        </Card>
-        ))}
-      </Fragment>
-      )
+      page = ( 
+        <div style={{display: 'flex'}}>
+          {posts.sort(sortBy(order)).filter(post => post.deleted === false).map( post => (
+            <Card key={post.id} post={post}/>
+          ))}        
+        </div>
+        )
     }
     return (
       <div className="App">
